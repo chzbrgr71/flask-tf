@@ -44,7 +44,7 @@ def detect_image():
     #Final dict result to jsonify
     result = {
         "image": "",
-        "is_ed_sheehan": None,
+        "is_ed_sheeran": None,
         "confidence" : 0.0
     }
 
@@ -79,13 +79,13 @@ def detect_image():
 
         if score > 0.5:
             print('I am confident this is Ed Sheeran (%s)' % (score))
-            result["is_ed_sheehan"] = 1
+            result["is_ed_sheeran"] = 1
             result["confidence"] = float(score)
 
 
         else:
             print('This is not Ed Sheeran (%s)' % (score))
-            result["is_ed_sheehan"] = 0
+            result["is_ed_sheeran"] = 0
             result["confidence"] = float(score)
    
     encoded_json = json.dumps(result)
