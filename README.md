@@ -20,7 +20,7 @@ curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf
 #### Container
 
 ```bash
-export IMAGE_TAG=1.7
+export IMAGE_TAG=1.8
 
 docker build -t chzbrgr71/edsheeran-flask-app:$IMAGE_TAG .
 
