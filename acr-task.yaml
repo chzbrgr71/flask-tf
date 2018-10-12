@@ -5,7 +5,7 @@ steps:
   - id: push-image
     push: ["{{.Run.Registry}}/chzbrgr71/edsheeran-flask-app:acr-task-{{.Run.ID}}"]
   - id: helm-deploy
-    cmd: chzbrgr71/helm-acr-task:1.0
+    cmd: chzbrgr71/helm-acr-task:1.0 upgrade flask-tf --set image={{.Run.Registry}}/chzbrgr71/edsheeran-flask-app,imageTag=acr-task-{{.Run.ID}} ./chart
     env:
       - SP={{.Values.SP}}
       - PASSWORD={{.Values.PASSWORD}}
@@ -18,4 +18,4 @@ steps:
       - SLACK_WEBHOOK={{.Values.SLACK_WEBHOOK}}
       - SLACK_CHANNEL="general"
       - SLACK_USERNAME="Azure Container Registry Task"
-      - SLACK_MESSAGE="ACR Task complete. New version released."
+      - SLACK_MESSAGE="ACR Task complete. New Flask API version released."
