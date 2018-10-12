@@ -1,0 +1,21 @@
+version: 1.0-preview-1
+steps:
+  - id: build-image
+    build: -t {{.Run.Registry}}/chzbrgr71/edsheeran-flask-app:acr-task-{{.Run.ID}} .
+  - id: push-image
+    push: ["{{.Run.Registry}}/chzbrgr71/edsheeran-flask-app:acr-task-{{.Run.ID}}"]
+  - id: helm-deploy
+    cmd: chzbrgr71/helm-acr-task:1.0
+    env:
+      - SP={{.Values.SP}}
+      - PASSWORD={{.Values.PASSWORD}}
+      - TENANT={{.Values.TENANT}}
+      - CLUSTER_RESOURCE_GROUP=briar-aks-300
+      - CLUSTER_NAME=briar-aks-300
+  - id: slack-notify
+    cmd: technosophos/slack-notify:latest
+    env:
+      - SLACK_WEBHOOK={{.Values.SLACK_WEBHOOK}}
+      - SLACK_CHANNEL="general"
+      - SLACK_USERNAME="Azure Container Registry Task"
+      - SLACK_MESSAGE="ACR Task complete. New version released."
