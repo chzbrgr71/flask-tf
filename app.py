@@ -65,7 +65,7 @@ def detect_image():
         tf.import_graph_def(graph_def, name='')
 
     with tf.Session() as sess:
-        # Feed the image_data as input to the graph and get first prediction
+        # Feed the image_data as input to the graph and get first prediction.
         softmax_tensor = sess.graph.get_tensor_by_name('final_result:0')
         
         predictions = sess.run(softmax_tensor, \
