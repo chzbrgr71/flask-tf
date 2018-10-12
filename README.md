@@ -11,7 +11,7 @@ curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf
 
 curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf/samples/brianredmond.jpg" http://localhost:5000/detect_image
 
-IP=104.40.245.94
+IP=40.114.204.205
 curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf/samples/edsheeran.jpg" http://$IP:5000/detect_image
 
 curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf/samples/bradpitt.jpg" http://$IP:5000/detect_image
@@ -20,7 +20,7 @@ curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf
 #### Container
 
 ```bash
-export IMAGE_TAG=1.6
+export IMAGE_TAG=1.7
 
 docker build -t chzbrgr71/edsheeran-flask-app:$IMAGE_TAG .
 
