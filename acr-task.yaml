@@ -5,7 +5,7 @@ steps:
   - id: push-image
     push: ["{{.Run.Registry}}/chzbrgr71/edsheeran-flask-app:acr-task-{{.Run.ID}}"]
   - id: helm-deploy
-    cmd: chzbrgr71/helm-acr-task:1.2 upgrade --install flask-tf --set image={{.Run.Registry}}/chzbrgr71/edsheeran-flask-app,imageTag=acr-task-{{.Run.ID}} ./chart
+    cmd: chzbrgr71/helm-acr-task:1.2 upgrade --install flask-tf --set deploy.image={{.Run.Registry}}/chzbrgr71/edsheeran-flask-app,deploy.imageTag=acr-task-{{.Run.ID}} ./chart
     env:
       - SP={{.Values.SP}}
       - PASSWORD={{.Values.PASSWORD}}
