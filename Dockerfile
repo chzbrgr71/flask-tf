@@ -5,13 +5,15 @@ WORKDIR /usr/src/app
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY app.py .
+COPY retrained_labels.txt .
+#COPY retrained_graph.pb .
+COPY /static ./static
+COPY /templates ./templates
+
+RUN wget https://raw.githubusercontent.com/chzbrgr71/flask-tf/master/retrained_graph.pb
 
 EXPOSE 5000
-
-#ENV FLASK_APP app.py
-#ENV FLASK_DEBUG 1
-#CMD [ "python",  "-m", "flask", "run" ]
 
 ENTRYPOINT ["python"]
 CMD ["app.py"]
