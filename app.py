@@ -77,7 +77,7 @@ def detect_image():
         
         score = predictions[0][0]
 
-        if score > 0.5:
+        if score > 0.51:
             print('I am confident this is Ed Sheeran (%s)' % (score))
             result["is_ed_sheeran"] = 1
             result["confidence"] = float(score)
