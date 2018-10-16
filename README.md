@@ -15,6 +15,7 @@ IP=40.114.204.205
 IMAGE=ed-sheeran-puppet.jpg
 curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf/samples/$IMAGE" http://$IP:5000/detect_image
 
+
 ```
 
 #### Container
