@@ -10,12 +10,17 @@ curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf
 curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf/samples/bradpitt.jpg" http://localhost:5000/detect_image
 
 curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf/samples/brianredmond.jpg" http://localhost:5000/detect_image
+```
 
-IP=40.114.204.205
+#### Model in AKS
+
+```bash
+IP=40.114.204.205 && curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf/samples/$IMAGE" http://$IP:5000/detect_image
+
+IMAGE=edsheeran.jpg
+IMAGE=brianredmond.jpg
+IMAGE=bradpitt.jpg
 IMAGE=ed-sheeran-puppet.jpg
-curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf/samples/$IMAGE" http://$IP:5000/detect_image
-
-
 ```
 
 #### Container
@@ -32,7 +37,7 @@ docker run -d --name flask -p 5000:5000 chzbrgr71/edsheeran-flask-app:$IMAGE_TAG
 
 #### Helm Install
 
-helm install --name flask-tf --set image=chzbrgr71/edsheeran-flask-app,imageTag=1.6 ./chart
+helm install --name flask-tf --set image=chzbrgr71/edsheeran-flask-app,imageTag=2.0 ./chart
 
 ### Setup Github webhook
 
@@ -43,6 +48,8 @@ SLACK_WEBHOOK=
 SP=
 PASSWORD=
 TENANT=
+CLUSTER_RESOURCE_GROUP=
+CLUSTER_NAME=
 
 az acr task create \
     --registry $ACR_NAME \
@@ -54,5 +61,7 @@ az acr task create \
     --set-secret SLACK_WEBHOOK=$SLACK_WEBHOOK \
     --set-secret SP=$SP \
     --set-secret PASSWORD=$PASSWORD \
-    --set-secret TENANT=$TENANT
+    --set-secret TENANT=$TENANT \
+    --set-secret CLUSTER_RESOURCE_GROUP=$CLUSTER_RESOURCE_GROUP \
+    --set-secret CLUSTER_NAME=$CLUSTER_NAME
 ```
