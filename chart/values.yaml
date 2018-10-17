@@ -7,6 +7,6 @@ service:
 deploy:
   name: flask-tf
   replicas: 2
-  image: briaracreu.azurecr.io/chzbrgr71/edsheeran-flask-app
+  image: briar.azurecr.io/chzbrgr71/edsheeran-flask-app
   imageTag: build-ca2
   containerPort: 5000
