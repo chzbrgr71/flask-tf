@@ -15,12 +15,12 @@ curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf
 #### Model in AKS
 
 ```bash
-IP=40.114.204.205 && curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf/samples/$IMAGE" http://$IP:5000/detect_image
-
 IMAGE=edsheeran.jpg
 IMAGE=brianredmond.jpg
 IMAGE=bradpitt.jpg
 IMAGE=ed-sheeran-puppet.jpg
+
+IP=40.114.204.205 && curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf/samples/$IMAGE" http://$IP:5000/detect_image
 ```
 
 #### Container
