@@ -1,12 +1,9 @@
-# Default values for chart
-
 service:
-  type: LoadBalancer
-  port: 5000
+  type: ClusterIP
+  ingressDNSName: flask-tf.e1b1189837d740fbad69.eastus.aksapp.io
 
 deploy:
   name: flask-tf
-  replicas: 2
-  image: briar.azurecr.io/chzbrgr71/edsheeran-flask-app
-  imageTag: build-ca2
-  containerPort: 5000
+  replicas: 3
+  image: "chzbrgr71/edsheeran-flask-app"
+  imageTag: "3.0"
