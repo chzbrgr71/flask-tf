@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "{{.Values.deploy.name}}"
+  name: flask-tf
 spec:
   replicas: {{ default 1 .Values.deploy.replicas }}
   selector:
@@ -13,11 +13,11 @@ spec:
         app: flask-tf
     spec:
       containers:
-        - image: "{{.Values.deploy.image}}:{{.Values.deploy.imageTag}}"
+        - image: {{.Values.deploy.image}}:{{.Values.deploy.imageTag}}
           imagePullPolicy: Always
           name: flask-tf
           ports:
-          - containerPort: {{.Values.deploy.containerPort}}
+          - containerPort: 5000
             protocol: TCP
       restartPolicy: Always
 ---
@@ -31,7 +31,23 @@ spec:
   type: "{{.Values.service.type}}"
   ports:
   - name: http
-    port: {{.Values.service.port}}
-    targetPort: {{.Values.service.port}}
+    port: 5000
+    targetPort: 5000
   selector:
     app: flask-tf
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: flask-tf
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+  - host: "{{.Values.service.ingressDNSName}}"
+    http:
+      paths:
+      - backend:
+          serviceName: flask-tf
+          servicePort: 5000
+        path: /detect_image

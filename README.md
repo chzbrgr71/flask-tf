@@ -16,17 +16,19 @@ curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf
 
 ```bash
 IMAGE=edsheeran.jpg
-IMAGE=brianredmond.jpg
 IMAGE=bradpitt.jpg
+IMAGE=brianredmond.jpg
 IMAGE=ed-sheeran-puppet.jpg
 
-IP=40.114.204.205 && curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf/samples/$IMAGE" http://$IP:5000/detect_image
+IP=flask-tf.e1b1189837d740fbad69.eastus.aksapp.io && curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf/samples/$IMAGE" http://$IP/detect_image
+
+IP=flask-tf.b7c8110bf9aa4867a05d.westeurope.aksapp.io && curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf/samples/$IMAGE" http://$IP/detect_image
 ```
 
 #### Container
 
 ```bash
-export IMAGE_TAG=2.0
+export IMAGE_TAG=3.0
 
 docker build -t chzbrgr71/edsheeran-flask-app:$IMAGE_TAG .
 
@@ -37,7 +39,10 @@ docker run -d --name flask -p 5000:5000 chzbrgr71/edsheeran-flask-app:$IMAGE_TAG
 
 #### Helm Install
 
-helm install --name flask-tf --set image=chzbrgr71/edsheeran-flask-app,imageTag=2.0 ./chart
+helm install --name flask-tf --set service.ingressDNSName=flask-tf.e1b1189837d740fbad69.eastus.aksapp.io ./chart
+
+helm install --name flask-tf --set service.ingressDNSName=flask-tf.b7c8110bf9aa4867a05d.westeurope.aksapp.io ./chart
+
 
 ### Setup Github webhook
 
@@ -49,7 +54,8 @@ SP=
 PASSWORD=
 TENANT=
 CLUSTER_RESOURCE_GROUP=
-CLUSTER_NAME=
+CLUSTER_NA_NAME=
+CLUSTER_EU_NAME=
 
 az acr task create \
     --registry $ACR_NAME \
@@ -63,5 +69,6 @@ az acr task create \
     --set-secret PASSWORD=$PASSWORD \
     --set-secret TENANT=$TENANT \
     --set-secret CLUSTER_RESOURCE_GROUP=$CLUSTER_RESOURCE_GROUP \
-    --set-secret CLUSTER_NAME=$CLUSTER_NAME
+    --set-secret CLUSTER_NA_NAME=$CLUSTER_NA_NAME \
+    --set-secret CLUSTER_EU_NAME=$CLUSTER_EU_NAME
 ```
