@@ -71,6 +71,6 @@ az acr task create \
     --set-secret PASSWORD=$PASSWORD \
     --set-secret TENANT=$TENANT \
     --set-secret CLUSTER_RESOURCE_GROUP=$CLUSTER_RESOURCE_GROUP \
-    --set-secret CLUSTER_NA_NAME=$CLUSTER_NA_NAME \
-    --set-secret CLUSTER_EU_NAME=$CLUSTER_EU_NAME
+    --set-secret CLUSTER_EAST_NAME=$CLUSTER_EAST_NAME \
+    --set-secret CLUSTER_WEST_NAME=$CLUSTER_WEST_NAME
 ```
