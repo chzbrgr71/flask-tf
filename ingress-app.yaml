@@ -35,3 +35,19 @@ spec:
     targetPort: 5000
   selector:
     app: flask-tf
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: flask-tf
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+  - host: "{{.Values.service.ingressDNSName}}"
+    http:
+      paths:
+      - backend:
+          serviceName: flask-tf
+          servicePort: 5000
+        path: /detect_image

@@ -20,15 +20,19 @@ IMAGE=bradpitt.jpg
 IMAGE=brianredmond.jpg
 IMAGE=ed-sheeran-puppet.jpg
 
-IP=flask-tf.e1b1189837d740fbad69.eastus.aksapp.io && curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf/samples/$IMAGE" http://$IP/detect_image
+IP=168.62.223.180 && curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf/samples/$IMAGE" http://$IP:5000/detect_image
 
-IP=flask-tf.b7c8110bf9aa4867a05d.westeurope.aksapp.io && curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf/samples/$IMAGE" http://$IP/detect_image
+IP=flaskeastus.brianredmond.io && curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf/samples/$IMAGE" http://$IP:5000/detect_image
+
+IP=flaskwestus.brianredmond.io && curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf/samples/$IMAGE" http://$IP:5000/detect_image
+
+IP=briar.trafficmanager.net && curl -F "image.jpg=@/Users/brianredmond/gopath/src/github.com/chzbrgr71/flask-tf/samples/$IMAGE" http://$IP:5000/detect_image
 ```
 
 #### Container
 
 ```bash
-export IMAGE_TAG=3.0
+export IMAGE_TAG=4.0
 
 docker build -t chzbrgr71/edsheeran-flask-app:$IMAGE_TAG .
 
@@ -39,9 +43,7 @@ docker run -d --name flask -p 5000:5000 chzbrgr71/edsheeran-flask-app:$IMAGE_TAG
 
 #### Helm Install
 
-helm install --name flask-tf --set service.ingressDNSName=flask-tf.e1b1189837d740fbad69.eastus.aksapp.io ./chart
-
-helm install --name flask-tf --set service.ingressDNSName=flask-tf.b7c8110bf9aa4867a05d.westeurope.aksapp.io ./chart
+helm install --name flask-tf ./chart
 
 
 ### Setup Github webhook

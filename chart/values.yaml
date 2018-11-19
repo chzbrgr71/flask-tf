@@ -1,9 +1,8 @@
 service:
-  type: ClusterIP
-  ingressDNSName: flask-tf.e1b1189837d740fbad69.eastus.aksapp.io
+  type: LoadBalancer
 
 deploy:
   name: flask-tf
   replicas: 3
-  image: "chzbrgr71/edsheeran-flask-app"
-  imageTag: "3.0"
+  image: "briaracr.azurecr.io/chzbrgr71/edsheeran-flask-app"
+  imageTag: "4.0"
